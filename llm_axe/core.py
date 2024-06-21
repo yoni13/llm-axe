@@ -248,6 +248,9 @@ def selenium_hybrid_reader(url):
 
         if noscript and 'enable' in str(noscript.get_text):
             body_text = selenium_reader(url)
+        
+        if noscript and '啟用' in str(noscript.get_text):
+            body_text = selenium_reader(url)
 
         if body_text == "":
             body_text = selenium_reader(url)
@@ -266,9 +269,10 @@ def fetch_url_info(url):
     headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36'}
     try:
         response = requests.get(url, headers=headers,timeout=5)
+        response.encoding = 'utf-8'
         if response.status_code == 200:
             soup = BeautifulSoup(response.text, 'html.parser')
-            title = soup.find('title').text if soup.find('title') else 'No title found'
+            title = soup.find('title').text if soup.find('title') else 'No title found' # ord() is used to convert 
             meta_desc = soup.find('meta', attrs={'name': 'description'})
             description = meta_desc['content'] if meta_desc else 'No description found'
             return {"url": url, 'title': title, 'description': description}
