@@ -54,6 +54,7 @@ def make_prompt(role:str, content:str, images:list=None):
     }
     if images is not None:
         args["images"] = images
+    print({**args})
     return {**args}
 
 
@@ -272,13 +273,14 @@ def fetch_url_info(url):
         response.encoding = 'utf-8'
         if response.status_code == 200:
             soup = BeautifulSoup(response.text, 'html.parser')
-            title = soup.find('title').text if soup.find('title') else 'No title found' # ord() is used to convert 
+            title = soup.find('title').text if soup.find('title') else 'No title found'
             meta_desc = soup.find('meta', attrs={'name': 'description'})
             description = meta_desc['content'] if meta_desc else 'No description found'
             return {"url": url, 'title': title, 'description': description}
         else:
             return None
     except Exception as e:
+        print(e)
         return None
 
 

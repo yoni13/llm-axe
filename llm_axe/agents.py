@@ -543,7 +543,7 @@ class OnlineAgent:
 
         # Use system prompt as user, since we have chat history
         url_picker_prompt = get_yaml_prompt("system_prompts.yaml", "UrlPicker")
-        url_picker_prompt = make_prompt("user", url_picker_prompt.format(question=prompt, urls=search_results))
+        url_picker_prompt = make_prompt("user", url_picker_prompt.format(question=prompt, urls=search_results.encode().decode('unicode_escape')))
         url_picker_prompts.append(url_picker_prompt)
 
         resp = self.llm.ask(url_picker_prompts, format="json", temperature=self.temperature)
@@ -570,7 +570,6 @@ class OnlineAgent:
                     回答下面問題: 
                     『{prompt}』
                     '''
-        
         final_responder = Agent(llm=self.llm, agent_type=AgentType.GENERIC_RESPONDER)
         response = final_responder.ask(user_prompt, history=history)
 
