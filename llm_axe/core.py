@@ -54,7 +54,6 @@ def make_prompt(role:str, content:str, images:list=None):
     }
     if images is not None:
         args["images"] = images
-
     return {**args}
 
 
