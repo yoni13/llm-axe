@@ -562,13 +562,14 @@ class OnlineAgent:
             
         website_text = self.site_reader_function(url)
         user_prompt = f'''
-                    請閱讀以下資訊:
+                    Please read the following information:
                     
-                    關於網址 {url}: 
+                    Information about Website {url}: 
                     {website_text}
 
-                    回答下面問題: 
-                    『{prompt}』
+                    Answer the following question based on the above information: 
+                    {prompt}
+                    Start your answer with "Based on information from the internet,"
                     '''
         final_responder = Agent(llm=self.llm, agent_type=AgentType.GENERIC_RESPONDER)
         response = final_responder.ask(user_prompt, history=history)
