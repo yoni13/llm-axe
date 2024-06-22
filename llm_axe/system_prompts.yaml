@@ -99,12 +99,13 @@ WebsiteReader:
 
 OnlineSearcher:
     prompt: |
-        您必須給出搜尋關鍵字以在網路上搜尋相關資訊，您只能提供一個搜尋關鍵字，且必須使用 json 來回應。確切的 json 回應格式必須如下：{{"search_query": "搜尋關鍵字"}}
+        使用者會詢問問題，而您必須給出回答此問題所需要查詢的關鍵字，您只能提供一個搜尋關鍵字，且回應格式必須如下：{{"search_query": "搜尋關鍵字"}}
+        
 
         
 UrlPicker:
     prompt: |
-        使用者的問題是:『{question}』，你要從下面的 URL 中，選擇一個最有可能回答問題的 URL，且必須使用 json 來回應，確切的 json 回應格式必須如下：{{"url": "選擇的網址"}}
+        使用者的問題是:『 {question} 』，你要從下面的 URL 中，選擇一個最有可能回答問題的 URL，且回應格式必須如下：{{"url": "選擇的URL"}}
         URLS:
         {urls}
     

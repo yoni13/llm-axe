@@ -545,7 +545,7 @@ class OnlineAgent:
         url_picker_prompt = get_yaml_prompt("system_prompts.yaml", "UrlPicker")
         url_picker_prompt = make_prompt("user", url_picker_prompt.format(question=prompt, urls=search_results.encode().decode('unicode_escape')))
         url_picker_prompts.append(url_picker_prompt)
-
+        print(url_picker_prompts)
         resp = self.llm.ask(url_picker_prompts, format="json", temperature=self.temperature)
         resp_json = safe_read_json(resp)
 
@@ -581,6 +581,7 @@ class OnlineAgent:
     def get_search_query(self, question):
         user_prompt = make_prompt("user", question)
         prompts = [self.system_prompt, user_prompt]
+        print(prompts)
         response = self.llm.ask(prompts, format="json", temperature=self.temperature)
         response_json = safe_read_json(response)
         self.chat_history.append(prompts[1])
